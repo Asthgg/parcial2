@@ -1,0 +1,24 @@
+1.	Sección Crítica
+
+1.1.	El acceso a recursos compartidos siempre debe hacerse dentro de una sección crítica porque de 
+        esta manera se garantiza que sólo un proceso a la vez pueda acceder a ese recurso, 
+        evitando que haya interrupciones del sistema que impidan que la operación se haga de manera atómica y pueda haber modificaciones indeseadas en el resultado.
+        
+
+
+
+1.2.	La sección crítica debe ser lo más pequeña posible, es decir, dentro de ésta sólo debe haber lo que es 
+        realmente necesario que se haga de manera atómica y que deba utilizar el recurso compartido. 
+        No quiere decir que el número de líneas de código debe ser reducido, sino que cada línea sea importante al momento de hacer la operación. 
+        Si se agregan líneas que pueden ser ejecutadas fuera de la sección crítica y que no necesitan acceder a los recursos compartidos, 
+        impediría que otros procesos pudiesen entrar en la sección crítica más rápido. Lo que aumentaría los tiempos de espera activa innecesariamente. 
+
+        
+
+1.3.	Se debe sacar una copia de todas las variables compartidas que van a ser utilizadas porque de no ser así, 
+        el valor podría ser cambiado por los próximos procesos que entren a la sección crítica, lo que podría generar 
+        inconsistencias en los datos. La copia permite tener el valor exacto de un momento particular en el tiempo, 
+        mientras que si se trabaja directamente con la variable compartida ese valor podría cambiar y no guardar relación con el valor del momento exacto de su consulta.
+
+Ejemplo:  si dos o mas procesos incrementan alteran una variable en orden, osea primero se altera con el proceso 1 y luego con el 2 y asi con los demas procesos. Ademas despues de ser alterada se 
+imprime en pantalla, si no se hace  una copia se puede llegar a imprimir en desorden  o en el peor de los casos se puede presentar errores.
